@@ -1,0 +1,9 @@
+[pr_reviewer]
+extra_instructions = """
+Apply the project review guidelines in best_practices.md / REVIEW_GUIDELINES.md. Flag design violations (composition over inheritance, dependency injection, pragmatic SOLID) and comment/documentation convention violations in addition to bugs.
+"""
+
+[pr_code_suggestions]
+extra_instructions = """
+Follow best_practices.md.
+"""

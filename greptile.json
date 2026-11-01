@@ -1,0 +1,51 @@
+{
+  "strictness": 2,
+  "commentTypes": [
+    "logic",
+    "syntax",
+    "style"
+  ],
+  "customContext": {
+    "rules": [
+      {
+        "rule": "[G1 Composition over inheritance] Do not introduce class inheritance to share behaviour. Prefer composition: hold a collaborator and delegate. Inheritance is acceptable only for genuine *is-a* relationships with a stable abstract interface (e.g. implementing a `Protocol`/interface, a Go interface, an abstract base class with no state). Flag: subclasses that override concrete parent methods to change behaviour; base classes that exist only to share helpers; inheritance depth > 1; mixins carrying state.",
+        "scope": [
+          "**"
+        ]
+      },
+      {
+        "rule": "[G2 Pragmatic SOLID] **Single responsibility**: a type or function does one thing. Flag functions > ~60 lines that mix I/O, parsing and business logic; types that both manage lifecycle and implement policy. **Open/closed**: new variants should be added by adding a new implementation of an existing interface, not by adding another `if/else`/`switch` arm on a type tag. Flag growing type switches on an enum/string kind where an interface already exists. **Liskov**: implementations must honour the documented contract of the interface (no \"not supported\" panics in a method the interface requires, no stricter preconditi",
+        "scope": [
+          "**"
+        ]
+      },
+      {
+        "rule": "[G3 Dependency injection] Collaborators (clients, stores, clocks, random sources, providers, loggers) are passed in through constructors/parameters, not created inside the function and not read from globals, module-level singletons, or environment variables deep inside logic. Time and randomness are injected (`clock`, `now()`, `rng`) so code is testable. Flag: `time.Now()`/`datetime.now()`/`Date.now()` inside business logic that has a clock available; `new`/`make_provider`/`os.environ`/`process.env` inside non-constructor code; hidden network calls in constructors.",
+        "scope": [
+          "**"
+        ]
+      },
+      {
+        "rule": "[G4 Error handling & boundaries] Errors are returned/raised with context, never swallowed (`except Exception: pass`, `_ = err`, empty `catch`). Flag silent error drops and `log-and-continue` on errors that affect correctness. Validate at the boundary (input parsing), trust inside.",
+        "scope": [
+          "**"
+        ]
+      },
+      {
+        "rule": "[G5 Comment and documentation conventions] Public functions/types have a doc comment stating *what* and *why*, preconditions and units (ms vs ns, normalized vs pixel coordinates). Comments describe intent, not mechanics. Flag comments that restate the code (`i += 1  # increment i`), **stale or misleading comments** (comment contradicts the code), commented-out code, `TODO`/`FIXME` without an owner or issue reference, and docstrings whose parameter lists do not match the signature. Language conventions: Go doc comments start with the identifier name; Python uses Google-style docstrings; TS uses TSDoc `/** */`; C++ public headers use `//",
+        "scope": [
+          "**"
+        ]
+      },
+      {
+        "rule": "[G6 Naming and units] Names carry units and clock domain where relevant (`ts_ms`, `wall_ns`, `retention_s`). Flag unit-less time/size names and mixed clock domains in one expression.",
+        "scope": [
+          "**"
+        ]
+      }
+    ],
+    "files": [
+      "REVIEW_GUIDELINES.md"
+    ]
+  }
+}
